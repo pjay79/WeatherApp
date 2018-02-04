@@ -17,7 +17,8 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Icon name="sun-o" size={30} color="black" />
-        <Text style={styles.welcome}>Weather App</Text>
+        <Text style={styles.welcome}>Weather</Text>
+        <Text style={styles.description}>LET&apos;S MAKE IT RAIN</Text>
         <Button
           title="START"
           onPress={() => this.props.navigation.navigate('WeatherScreen')}
@@ -39,6 +40,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    color: 'black',
+  },
+  description: {
+    color: 'black',
+    fontSize: 14,
+    letterSpacing: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 });
 

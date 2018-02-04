@@ -5,7 +5,7 @@ import googlePlacesAPI from '../config/google';
 
 class WeatherScreen extends Component {
   static navigationOptions = {
-    title: 'Weather App',
+    title: 'Current weather',
     headerTintColor: 'black',
     headerStyle: {
       backgroundColor: 'gold',
@@ -17,7 +17,7 @@ class WeatherScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Cities and Temperatures</Text>
+        <Text style={styles.welcome}>Add city:</Text>
         <GooglePlacesAutocomplete
           placeholder="Search"
           minLength={2} // minimum length of text to search
