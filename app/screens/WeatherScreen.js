@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import axios from 'axios';
 import Search from '../components/Search';
+import darkSkyAPI from '../config/darkSky';
 
 class WeatherScreen extends Component {
   static navigationOptions = {
@@ -17,17 +19,16 @@ class WeatherScreen extends Component {
     cities: [],
   };
 
-  onPress = (data, details = null) => {
-    // 'details' is provided when fetchDetails = true
-    this.addCity(
+  onPress = async (data, details = null) => {
+    await this.addCity(
       details.formatted_address,
       details.geometry.location.lat,
       details.geometry.location.lat,
     );
-    // console.log(data, details);
   };
 
-  addCity = (city, lat, lon) => {
+  addCity = async (city, lat, lon) => {
+    const forecast = await this.addForecast(lat, lon);
     this.setState(prevState => ({
       cities: [
         ...prevState.cities,
@@ -35,10 +36,16 @@ class WeatherScreen extends Component {
           city,
           lat,
           lon,
+          forecast,
         },
       ],
     }));
     console.log(this.state.cities);
+  };
+
+  addForecast = async (lat, lon) => {
+    const searchForecast = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}`);
+    return searchForecast;
   };
 
   render() {

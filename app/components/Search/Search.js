@@ -9,7 +9,7 @@ const Search = ({ onPress }) => (
     placeholder="Search"
     minLength={2} // minimum length of text to search
     autoFocus={false}
-    returnKeyType="search" // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+    returnKeyType="go" // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
     listViewDisplayed="auto" // true/false/undefined
     fetchDetails
     renderDescription={row => row.description} // custom description render
