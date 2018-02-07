@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Dimensions, View } from 'react-native';
 import axios from 'axios';
+import Modal from 'react-native-modal';
+import SlideGroup from '../components/SlideGroup';
+import SlideItem from '../components/SlideItem';
+import Button from '../components/Button';
 import Search from '../components/Search';
 import darkSkyAPI from '../config/darkSky';
 
@@ -17,6 +21,7 @@ class WeatherScreen extends Component {
 
   state = {
     cities: [],
+    isModalVisible: false,
   };
 
   onPress = async (data, details = null) => {
@@ -44,19 +49,39 @@ class WeatherScreen extends Component {
   };
 
   addForecast = async (lat, lon) => {
-    const searchForecast = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}`);
-    return searchForecast;
+    const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=minutely,hourly,flags?units=si`);
+    return result;
   };
+
+  toggleModal = () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible }));
+
+  renderItem = ({ item }) => <SlideItem item={item} />;
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Add city:</Text>
-        <Search onPress={this.onPress} />
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={styles.modalContainer}>
+            <Search onPress={this.onPress} />
+            <Button
+              onPress={() => this.toggleModal()}
+              title="Close"
+              style={{ backgroundColor: 'black' }}
+            />
+          </View>
+        </Modal>
+        <SlideGroup data={this.state.cities} renderItem={this.renderItem} />
+        <Button
+          onPress={() => this.toggleModal()}
+          title="Add City"
+          style={{ backgroundColor: 'black' }}
+        />
       </View>
     );
   }
 }
+
+const { height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -69,6 +94,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },
+  modalContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'gold',
+    height: height * 0.6,
+    marginTop: height * 0.2,
+    marginBottom: height * 0.2,
   },
 });
 

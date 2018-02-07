@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
   predefinedPlacesDescription: {
     color: 'black',
   },
+  poweredContainer: {
+    backgroundColor: 'gold',
+  },
 });
 
 export default styles;

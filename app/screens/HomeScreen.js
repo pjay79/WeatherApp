@@ -18,7 +18,7 @@ class HomeScreen extends Component {
       <View style={styles.container}>
         <Icon name="sun-o" size={30} color="black" />
         <Text style={styles.welcome}>Weather</Text>
-        <Text style={styles.description}>LET&apos;S MAKE IT RAIN</Text>
+        <Text style={styles.description}>POWERED BY DARKSKY</Text>
         <Button
           title="START"
           onPress={() => this.props.navigation.navigate('WeatherScreen')}
