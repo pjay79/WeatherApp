@@ -25,11 +25,8 @@ class WeatherScreen extends Component {
   };
 
   onPress = async (data, details = null) => {
-    await this.addCity(
-      details.formatted_address,
-      details.geometry.location.lat,
-      details.geometry.location.lat,
-    );
+    await this.addCity(details.name, details.geometry.location.lat, details.geometry.location.lat);
+    console.log(details);
   };
 
   addCity = async (city, lat, lon) => {
@@ -45,6 +42,7 @@ class WeatherScreen extends Component {
         },
       ],
     }));
+    this.toggleModal();
     console.log(this.state.cities);
   };
 
@@ -89,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'gold',
+    paddingBottom: 10,
   },
   welcome: {
     fontSize: 20,
