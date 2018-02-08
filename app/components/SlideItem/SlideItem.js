@@ -9,8 +9,8 @@ const SlideItem = ({ item }) => (
   <View style={[styles.slide, { backgroundColor: slideColors[item.forecast.data.currently.icon] }]}>
     <Text style={styles.title}>{item.city}</Text>
     <Image style={styles.icon} source={weatherIcons[item.forecast.data.currently.icon]} />
-    <Text style={styles.temperature}>{item.forecast.data.currently.temperature}</Text>
-    <Text style={styles.description}>{item.forecast.data.currently.summary}</Text>
+    <Text style={styles.temperature}>{item.forecast.data.currently.temperature}&deg;C</Text>
+    <Text style={styles.description}>{item.forecast.data.currently.summary.toUpperCase()}</Text>
   </View>
 );
 

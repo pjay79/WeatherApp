@@ -4031,6 +4031,12 @@ react-native-google-places-autocomplete@^1.3.6:
     prop-types "^15.5.10"
     qs "^5.2.0"
 
+react-native-indicators@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/react-native-indicators/-/react-native-indicators-0.11.1.tgz#820637a51dd4c060156fb6fb821bdc74154150d2"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-modal@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-5.0.0.tgz#d9a056e68a985678d9545fce38dcc1ac3299ba31"

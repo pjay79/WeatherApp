@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
+import { BallIndicator } from 'react-native-indicators';
 import SlideGroup from '../components/SlideGroup';
 import SlideItem from '../components/SlideItem';
 import Button from '../components/Button';
@@ -21,6 +22,7 @@ class WeatherScreen extends Component {
 
   state = {
     cities: [],
+    isLoading: false,
     isModalVisible: false,
   };
 
@@ -30,6 +32,7 @@ class WeatherScreen extends Component {
   };
 
   addCity = async (city, lat, lon) => {
+    this.setState(prevState => ({ isLoading: !prevState.isLoading }));
     const forecast = await this.addForecast(lat, lon);
     this.setState(prevState => ({
       cities: [
@@ -43,11 +46,12 @@ class WeatherScreen extends Component {
       ],
     }));
     this.toggleModal();
+    this.setState(prevState => ({ isLoading: !prevState.isLoading }));
     console.log(this.state.cities);
   };
 
   addForecast = async (lat, lon) => {
-    const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=minutely,hourly,flags?units=si`);
+    const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=minutely,hourly,flags&units=ca`);
     return result;
   };
 
@@ -61,6 +65,7 @@ class WeatherScreen extends Component {
         <Modal isVisible={this.state.isModalVisible}>
           <View style={styles.modalContainer}>
             <Search onPress={this.onPress} />
+            {this.state.isLoading ? <BallIndicator /> : null}
             <Button
               onPress={() => this.toggleModal()}
               title="Close"
@@ -95,12 +100,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   modalContainer: {
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'gold',
     height: height * 0.6,
-    marginTop: height * 0.2,
-    marginBottom: height * 0.2,
   },
 });
 
