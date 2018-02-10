@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
+import Darksky from '../assets/images/darksky/poweredby-oneline.png';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -16,9 +17,9 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Icon name="sun-o" size={30} color="black" />
-        <Text style={styles.welcome}>Weather</Text>
-        <Text style={styles.description}>POWERED BY DARKSKY</Text>
+        <Icon name="sun-o" size={50} color="black" />
+        <Text style={styles.welcome}>The Weather</Text>
+        <Image style={styles.darkskyLogo} source={Darksky} />
         <Button
           title="START"
           onPress={() => this.props.navigation.navigate('WeatherScreen')}
@@ -37,17 +38,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'gold',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 44,
+    fontWeight: 'bold',
     textAlign: 'center',
-    margin: 10,
     color: 'black',
   },
-  description: {
-    color: 'black',
-    fontSize: 14,
-    letterSpacing: 4,
-    paddingLeft: 10,
-    paddingRight: 10,
+  darkskyLogo: {
+    width: 200,
+    height: 50,
+    resizeMode: 'contain',
   },
 });
 
