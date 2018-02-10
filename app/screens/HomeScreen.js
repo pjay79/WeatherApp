@@ -27,7 +27,9 @@ class HomeScreen extends Component {
         <Button
           title="START"
           onPress={() => this.props.navigation.navigate('WeatherScreen')}
-          style={{ backgroundColor: 'black' }}
+          style={{
+            backgroundColor: 'black',
+          }}
         />
       </View>
     );
@@ -37,9 +39,10 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'gold',
+    paddingBottom: 10,
   },
   logoWrapper: {
     alignItems: 'center',

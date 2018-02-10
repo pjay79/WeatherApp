@@ -25,7 +25,7 @@ const SlideGroup = ({
     <Pagination
       dotsLength={data.length}
       activeDotIndex={activeSlide}
-      containerStyle={{ backgroundColor: 'gold' }}
+      containerStyle={{ backgroundColor: 'gold', paddingTop: 0 }}
       dotStyle={{
         width: 10,
         height: 10,
@@ -33,9 +33,11 @@ const SlideGroup = ({
         marginHorizontal: 8,
         backgroundColor: 'rgba(255, 255, 255, 0.92)',
       }}
-      inactiveDotStyle={{
-        // Define styles for inactive dots here
-      }}
+      inactiveDotStyle={
+        {
+          // Define styles for inactive dots here
+        }
+      }
       inactiveDotOpacity={0.4}
       inactiveDotScale={0.6}
     />

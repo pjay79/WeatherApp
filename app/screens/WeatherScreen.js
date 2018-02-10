@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import SlideGroup from '../components/SlideGroup';
@@ -117,7 +117,9 @@ class WeatherScreen extends Component {
             <Button
               onPress={() => this.toggleModal()}
               title="Close"
-              style={{ backgroundColor: 'black' }}
+              style={{
+                backgroundColor: 'black',
+              }}
             />
           </View>
         </Modal>
@@ -127,6 +129,7 @@ class WeatherScreen extends Component {
           onSnapToItem={this.onSnapToItem}
           activeSlide={this.state.activeSlide}
         />
+        <Text style={styles.iconCredits}>Icons designed by Eucalyp from Flaticon</Text>
         <Button
           onPress={() => this.toggleModal()}
           title="Add City"
@@ -147,16 +150,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'gold',
     paddingBottom: 10,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
   modalContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'gold',
     height: height * 0.6,
+  },
+  iconCredits: {
+    fontSize: 8,
   },
 });
 
