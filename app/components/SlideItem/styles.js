@@ -20,8 +20,10 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   description: {
-    fontSize: 18,
+    fontSize: 14,
     color: 'black',
+    marginTop: 10,
+    textAlign: 'center',
   },
   icon: {
     height: 80,

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, Dimensions, View, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
-import { BallIndicator } from 'react-native-indicators';
 import SlideGroup from '../components/SlideGroup';
 import SlideItem from '../components/SlideItem';
 import Button from '../components/Button';
+import Loading from '../components/Loading';
 import Search from '../components/Search';
 import darkSkyAPI from '../config/darkSky';
 
@@ -28,10 +28,10 @@ class WeatherScreen extends Component {
     activeSlide: 0,
   };
 
-  componentDidMount = async () => {
-    // await AsyncStorage.removeItem('cities');
+  componentDidMount() {
+    // AsyncStorage.clear();
     this.fetchData();
-  };
+  }
 
   onSnapToItem = index => this.setState({ activeSlide: index });
 
@@ -49,24 +49,27 @@ class WeatherScreen extends Component {
 
   fetchData = async () => {
     try {
-      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
+      this.toggleFetching();
       const result = await AsyncStorage.getItem('nextCities');
       if (result !== null || undefined) {
         const cities = JSON.parse(result);
         cities.map(city => this.addCity(city.city, city.lat, city.lon));
+      } else {
+        this.toggleFetching();
       }
-      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
     } catch (error) {
       console.log(error);
     }
   };
 
+  toggleFetching = () => this.setState(prevState => ({ isFetching: !prevState.isFetching }));
+  toggleLoading = () => this.setState(prevState => ({ isLoading: !prevState.isLoading }));
   toggleModal = () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible }));
   closeModal = () => this.setState({ isModalVisible: false });
 
   addCity = async (city, lat, lon) => {
     try {
-      this.setState(prevState => ({ isLoading: !prevState.isLoading }));
+      this.toggleLoading();
       const forecast = await this.addForecast(lat, lon);
       this.setState(prevState => ({
         cities: [
@@ -88,8 +91,9 @@ class WeatherScreen extends Component {
       }));
       console.log(nextCities);
       await AsyncStorage.setItem('nextCities', JSON.stringify(nextCities));
-      this.setState(prevState => ({ isLoading: !prevState.isLoading }));
       this.closeModal();
+      this.toggleLoading();
+      this.toggleFetching();
     } catch (error) {
       console.log(error);
     }
@@ -105,10 +109,11 @@ class WeatherScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.isFetching ? <Loading /> : null}
         <Modal isVisible={this.state.isModalVisible}>
           <View style={styles.modalContainer}>
             <Search onPress={this.onPress} />
-            {this.state.isLoading ? <BallIndicator /> : null}
+            {this.state.isLoading ? <Loading /> : null}
             <Button
               onPress={() => this.toggleModal()}
               title="Close"
@@ -122,7 +127,6 @@ class WeatherScreen extends Component {
           onSnapToItem={this.onSnapToItem}
           activeSlide={this.state.activeSlide}
         />
-        {this.state.isFetching ? <BallIndicator /> : null}
         <Button
           onPress={() => this.toggleModal()}
           title="Add City"
