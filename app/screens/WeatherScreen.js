@@ -29,7 +29,6 @@ class WeatherScreen extends Component {
   };
 
   componentDidMount() {
-    // AsyncStorage.clear();
     this.fetchData();
   }
 
@@ -62,16 +61,11 @@ class WeatherScreen extends Component {
     }
   };
 
-  toggleFetching = () => this.setState(prevState => ({ isFetching: !prevState.isFetching }));
-  toggleLoading = () => this.setState(prevState => ({ isLoading: !prevState.isLoading }));
-  toggleModal = () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible }));
-  closeModal = () => this.setState({ isModalVisible: false });
-
   addCity = async (city, lat, lon) => {
     try {
       this.toggleLoading();
       const forecast = await this.addForecast(lat, lon);
-      this.setState(prevState => ({
+      await this.setState(prevState => ({
         cities: [
           ...prevState.cities,
           {
@@ -82,15 +76,7 @@ class WeatherScreen extends Component {
           },
         ],
       }));
-      console.log(this.state.cities);
-      const { cities } = this.state;
-      const nextCities = cities.map(each => ({
-        city: each.city,
-        lat: each.lat,
-        lon: each.lon,
-      }));
-      console.log(nextCities);
-      await AsyncStorage.setItem('nextCities', JSON.stringify(nextCities));
+      this.saveData();
       this.closeModal();
       this.toggleLoading();
       this.toggleFetching();
@@ -100,11 +86,48 @@ class WeatherScreen extends Component {
   };
 
   addForecast = async (lat, lon) => {
-    const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=hourly,flags&units=ca`);
-    return result;
+    try {
+      const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=hourly,flags&units=ca`);
+      return result;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
 
-  renderItem = ({ item }) => <SlideItem item={item} />;
+  deleteCity = async (index) => {
+    try {
+      await this.setState(prevState => ({
+        cities: prevState.cities.filter((_, i) => i !== index),
+      }));
+      this.saveData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  saveData = async () => {
+    try {
+      const { cities } = this.state;
+      const nextCities = cities.map(each => ({
+        city: each.city,
+        lat: each.lat,
+        lon: each.lon,
+      }));
+      await AsyncStorage.setItem('nextCities', JSON.stringify(nextCities));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  toggleFetching = () => this.setState(prevState => ({ isFetching: !prevState.isFetching }));
+  toggleLoading = () => this.setState(prevState => ({ isLoading: !prevState.isLoading }));
+  toggleModal = () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible }));
+  closeModal = () => this.setState({ isModalVisible: false });
+
+  renderItem = ({ item, index }) => (
+    <SlideItem item={item} index={index} deleteCity={this.deleteCity} />
+  );
 
   render() {
     return (

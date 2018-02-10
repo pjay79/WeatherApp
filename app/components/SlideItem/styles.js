@@ -23,12 +23,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'black',
     marginTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     textAlign: 'center',
   },
   icon: {
     height: 80,
     width: 80,
     marginBottom: 25,
+  },
+  deleteIcon: {
+    marginTop: 10,
   },
 });
 
