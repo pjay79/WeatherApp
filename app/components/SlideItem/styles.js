@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     color: 'black',
-    marginBottom: 50,
+    marginBottom: 30,
   },
   temperature: {
     fontSize: 24,
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   icon: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     marginBottom: 25,
   },
 });

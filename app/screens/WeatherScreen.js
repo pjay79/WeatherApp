@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { StyleSheet, Dimensions, View, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import { BallIndicator } from 'react-native-indicators';
@@ -23,39 +23,82 @@ class WeatherScreen extends Component {
   state = {
     cities: [],
     isLoading: false,
+    isFetching: false,
     isModalVisible: false,
+    activeSlide: 0,
   };
+
+  componentDidMount = async () => {
+    // await AsyncStorage.removeItem('cities');
+    this.fetchData();
+  };
+
+  onSnapToItem = index => this.setState({ activeSlide: index });
 
   onPress = async (data, details = null) => {
-    await this.addCity(details.name, details.geometry.location.lat, details.geometry.location.lat);
-    console.log(details);
+    try {
+      await this.addCity(
+        details.name,
+        details.geometry.location.lat,
+        details.geometry.location.lat,
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  addCity = async (city, lat, lon) => {
-    this.setState(prevState => ({ isLoading: !prevState.isLoading }));
-    const forecast = await this.addForecast(lat, lon);
-    this.setState(prevState => ({
-      cities: [
-        ...prevState.cities,
-        {
-          city,
-          lat,
-          lon,
-          forecast,
-        },
-      ],
-    }));
-    this.toggleModal();
-    this.setState(prevState => ({ isLoading: !prevState.isLoading }));
-    console.log(this.state.cities);
-  };
-
-  addForecast = async (lat, lon) => {
-    const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=minutely,hourly,flags&units=ca`);
-    return result;
+  fetchData = async () => {
+    try {
+      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
+      const result = await AsyncStorage.getItem('nextCities');
+      if (result !== null || undefined) {
+        const cities = JSON.parse(result);
+        cities.map(city => this.addCity(city.city, city.lat, city.lon));
+      }
+      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   toggleModal = () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible }));
+  closeModal = () => this.setState({ isModalVisible: false });
+
+  addCity = async (city, lat, lon) => {
+    try {
+      this.setState(prevState => ({ isLoading: !prevState.isLoading }));
+      const forecast = await this.addForecast(lat, lon);
+      this.setState(prevState => ({
+        cities: [
+          ...prevState.cities,
+          {
+            city,
+            lat,
+            lon,
+            forecast,
+          },
+        ],
+      }));
+      console.log(this.state.cities);
+      const { cities } = this.state;
+      const nextCities = cities.map(each => ({
+        city: each.city,
+        lat: each.lat,
+        lon: each.lon,
+      }));
+      console.log(nextCities);
+      await AsyncStorage.setItem('nextCities', JSON.stringify(nextCities));
+      this.setState(prevState => ({ isLoading: !prevState.isLoading }));
+      this.closeModal();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  addForecast = async (lat, lon) => {
+    const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=hourly,flags&units=ca`);
+    return result;
+  };
 
   renderItem = ({ item }) => <SlideItem item={item} />;
 
@@ -73,7 +116,13 @@ class WeatherScreen extends Component {
             />
           </View>
         </Modal>
-        <SlideGroup data={this.state.cities} renderItem={this.renderItem} />
+        <SlideGroup
+          data={this.state.cities}
+          renderItem={this.renderItem}
+          onSnapToItem={this.onSnapToItem}
+          activeSlide={this.state.activeSlide}
+        />
+        {this.state.isFetching ? <BallIndicator /> : null}
         <Button
           onPress={() => this.toggleModal()}
           title="Add City"

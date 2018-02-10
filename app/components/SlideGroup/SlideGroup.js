@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import styles from './styles';
 
 const { width: viewportWidth } = Dimensions.get('window');
 
-const SlideGroup = ({ data, renderItem }) => (
+const SlideGroup = ({
+  data, renderItem, activeSlide, onSnapToItem,
+}) => (
   <View style={styles.container}>
     <Carousel
       layout="default"
@@ -18,6 +20,24 @@ const SlideGroup = ({ data, renderItem }) => (
       sliderWidth={viewportWidth}
       itemWidth={viewportWidth}
       slideStyle={{ width: viewportWidth }}
+      onSnapToItem={onSnapToItem}
+    />
+    <Pagination
+      dotsLength={data.length}
+      activeDotIndex={activeSlide}
+      containerStyle={{ backgroundColor: 'gold' }}
+      dotStyle={{
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        marginHorizontal: 8,
+        backgroundColor: 'rgba(255, 255, 255, 0.92)',
+      }}
+      inactiveDotStyle={{
+        // Define styles for inactive dots here
+      }}
+      inactiveDotOpacity={0.4}
+      inactiveDotScale={0.6}
     />
   </View>
 );
@@ -30,6 +50,8 @@ SlideGroup.propTypes = {
     forecast: PropTypes.object.isRequired,
   })).isRequired,
   renderItem: PropTypes.func.isRequired,
+  onSnapToItem: PropTypes.func.isRequired,
+  activeSlide: PropTypes.number.isRequired,
 };
 
 export default SlideGroup;
