@@ -21,6 +21,7 @@ const SlideGroup = ({
       itemWidth={viewportWidth}
       slideStyle={{ width: viewportWidth }}
       onSnapToItem={onSnapToItem}
+      // extraData={data}
     />
     <Pagination
       dotsLength={data.length}

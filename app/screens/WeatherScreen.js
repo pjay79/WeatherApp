@@ -100,11 +100,12 @@ class WeatherScreen extends Component {
       await this.setState(prevState => ({
         cities: prevState.cities.filter((_, i) => i !== index),
       }));
+
       try {
         if (this.state.activeSlide === this.state.cities.length) {
           this.onSnapToItem(this.state.cities.length - 1);
         } else {
-          return;
+          this.onSnapToItem(index);
         }
       } catch (error) {
         console.log(error);
@@ -163,11 +164,19 @@ class WeatherScreen extends Component {
           activeSlide={this.state.activeSlide}
         />
         <Text style={styles.iconCredits}>Icons designed by Eucalyp from Flaticon</Text>
-        <Button
-          onPress={() => this.toggleModal()}
-          title="Add City"
-          style={{ backgroundColor: 'black' }}
-        />
+        {this.state.cities.length < 6 ? (
+          <Button
+            onPress={() => this.toggleModal()}
+            title="Add City"
+            style={{ backgroundColor: 'black' }}
+          />
+        ) : (
+          <Button
+            onPress={() => console.log('Maximum cities added')}
+            title="Maximum cities added"
+            style={{ backgroundColor: 'black' }}
+          />
+        )}
       </View>
     );
   }
