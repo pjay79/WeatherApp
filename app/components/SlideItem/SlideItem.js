@@ -26,6 +26,7 @@ SlideItem.propTypes = {
     forecast: PropTypes.object.isRequired,
   }).isRequired,
   deleteCity: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default SlideItem;

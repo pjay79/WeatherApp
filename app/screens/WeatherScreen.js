@@ -22,7 +22,7 @@ class WeatherScreen extends Component {
 
   state = {
     cities: [],
-    isLoading: false,
+    isSearching: false,
     isFetching: false,
     isModalVisible: false,
     activeSlide: 0,
@@ -63,7 +63,7 @@ class WeatherScreen extends Component {
 
   addCity = async (city, lat, lon) => {
     try {
-      this.toggleLoading();
+      this.toggleSearching();
       const forecast = await this.addForecast(lat, lon);
       await this.setState(prevState => ({
         cities: [
@@ -78,7 +78,7 @@ class WeatherScreen extends Component {
       }));
       this.saveData();
       this.closeModal();
-      this.toggleLoading();
+      this.toggleSearching();
       this.toggleFetching();
     } catch (error) {
       console.log(error);
@@ -100,6 +100,16 @@ class WeatherScreen extends Component {
       await this.setState(prevState => ({
         cities: prevState.cities.filter((_, i) => i !== index),
       }));
+      try {
+        if (this.state.activeSlide === this.state.cities.length) {
+          this.onSnapToItem(this.state.cities.length - 1);
+        } else {
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
       this.saveData();
     } catch (error) {
       console.log(error);
@@ -121,7 +131,7 @@ class WeatherScreen extends Component {
   };
 
   toggleFetching = () => this.setState(prevState => ({ isFetching: !prevState.isFetching }));
-  toggleLoading = () => this.setState(prevState => ({ isLoading: !prevState.isLoading }));
+  toggleSearching = () => this.setState(prevState => ({ isSearching: !prevState.isSearching }));
   toggleModal = () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible }));
   closeModal = () => this.setState({ isModalVisible: false });
 
@@ -136,7 +146,7 @@ class WeatherScreen extends Component {
         <Modal isVisible={this.state.isModalVisible}>
           <View style={styles.modalContainer}>
             <Search onPress={this.onPress} />
-            {this.state.isLoading ? <Loading /> : null}
+            {this.state.isSearching ? <Loading /> : null}
             <Button
               onPress={() => this.toggleModal()}
               title="Close"
