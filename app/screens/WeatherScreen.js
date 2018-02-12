@@ -36,11 +36,17 @@ class WeatherScreen extends Component {
 
   onPress = async (data, details = null) => {
     try {
-      await this.addCity(
-        details.name,
-        details.geometry.location.lat,
-        details.geometry.location.lat,
-      );
+      const { cities } = this.state;
+      const addedCity = cities.find(city => city.city === details.name);
+      if (!addedCity) {
+        await this.addCity(
+          details.name,
+          details.geometry.location.lat,
+          details.geometry.location.lat,
+        );
+      } else {
+        this.toggleModal();
+      }
     } catch (error) {
       console.log(error);
     }
