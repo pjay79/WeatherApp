@@ -29,6 +29,7 @@ class WeatherScreen extends Component {
   };
 
   componentDidMount() {
+    // AsyncStorage.clear();
     this.fetchData();
   }
 

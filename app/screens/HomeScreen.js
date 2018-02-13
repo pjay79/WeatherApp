@@ -24,6 +24,7 @@ class HomeScreen extends Component {
   };
 
   async componentDidMount() {
+    // AsyncStorage.clear();
     await AsyncStorage.setItem('@SKIP_INTRO', JSON.stringify('true'));
   }
 
