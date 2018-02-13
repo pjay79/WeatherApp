@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Linking,
+  AsyncStorage,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
 import Darksky from '../assets/images/darksky/poweredby-oneline.png';
@@ -14,6 +22,10 @@ class HomeScreen extends Component {
     },
     headerLeft: null,
   };
+
+  async componentDidMount() {
+    await AsyncStorage.setItem('@SKIP_INTRO', JSON.stringify('true'));
+  }
 
   render() {
     return (

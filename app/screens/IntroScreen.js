@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 import LocationIcon from 'react-native-vector-icons/Entypo';
 import WeatherIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -13,6 +14,12 @@ class IntroScreen extends Component {
     },
   };
 
+  async componentWillMount() {
+    const value = await AsyncStorage.getItem('@SKIP_INTRO');
+    if (value !== null || value === 'true') {
+      this.props.navigation.navigate('HomeScreen');
+    }
+  }
   render() {
     return (
       <Onboarding
