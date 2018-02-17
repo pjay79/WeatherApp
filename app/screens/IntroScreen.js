@@ -16,7 +16,7 @@ class IntroScreen extends Component {
 
   async componentWillMount() {
     const value = await AsyncStorage.getItem('@SKIP_INTRO');
-    if (value !== null || value === 'true') {
+    if (value !== null) {
       this.props.navigation.navigate('HomeScreen');
     }
   }
