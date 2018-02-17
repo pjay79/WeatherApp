@@ -26,11 +26,11 @@ https://developers.google.com/places/web-service/intro
 * react-native
 * react-navigation
 * react-native-vector-icons
-* react-native-keyboard-aware-scroll-view
-* react-native-snap-carousel
-* react-native-modal
-* react-native-google-places-autocomplete
 * react-native-onboarding-swiper
+* react-native-modal
+* react-native-keyboard-aware-scroll-view
+* react-native-google-places-autocomplete
+* react-native-snap-carousel
 * axios
 
 ## Installation
