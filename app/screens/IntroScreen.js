@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 import LocationIcon from 'react-native-vector-icons/Entypo';
-import WeatherIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import WeatherIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Onboarding from 'react-native-onboarding-swiper';
 
 class IntroScreen extends Component {
@@ -32,7 +32,7 @@ class IntroScreen extends Component {
           },
           {
             backgroundColor: 'gold',
-            image: <WeatherIcon name="weather-partlycloudy" size={80} color="black" />,
+            image: <WeatherIcon name="cloud-download" size={80} color="black" />,
             title: 'Then get the latest weather updates...',
             subtitle: 'POWERED BY DARKSKY',
           },
