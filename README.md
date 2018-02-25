@@ -48,7 +48,7 @@ And also install Xcode for iOS simulator + Android Studio / Genymotion for Andro
 ### Project setup:
 
 Clone the repo:
-`git clone https://github.com/pjay79/ToDoList.git`
+`git clone https://github.com/pjay79/WeatherApp.git`
 
 Change to the project folder:
 `cd WeatherApp`
