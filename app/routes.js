@@ -1,18 +1,22 @@
 import { Animated, Easing } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import HomeScreen from '../screens/HomeScreen';
-import IntroScreen from '../screens/IntroScreen';
-import WeatherScreen from '../screens/WeatherScreen';
+import LoadingScreen from './screens/LoadingScreen';
+import IntroScreen from './screens/IntroScreen';
+import HomeScreen from './screens/HomeScreen';
+import WeatherScreen from './screens/WeatherScreen';
 
 const MainNavigator = StackNavigator(
   {
-    IntroScreen: {
+    Loading: {
+      screen: LoadingScreen,
+    },
+    Intro: {
       screen: IntroScreen,
     },
-    HomeScreen: {
+    Home: {
       screen: HomeScreen,
     },
-    WeatherScreen: {
+    Weather: {
       screen: WeatherScreen,
     },
   },

@@ -26,6 +26,7 @@ https://developers.google.com/places/web-service/intro
 * react-native
 * react-navigation
 * react-native-vector-icons
+* react-native-indicators
 * react-native-onboarding-swiper
 * react-native-modal
 * react-native-keyboard-aware-scroll-view

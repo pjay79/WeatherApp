@@ -4,10 +4,6 @@
  * @flow
  */
 
-import React from 'react';
-
-import MainNavigator from './app/routes/routes';
-
-const App = () => <MainNavigator />;
+import App from './app/index';
 
 export default App;

@@ -12,14 +12,16 @@ class IntroScreen extends Component {
       elevation: 0,
       borderBottomWidth: 0,
     },
+    headerLeft: null,
   };
 
   async componentWillMount() {
     const value = await AsyncStorage.getItem('@SKIP_INTRO');
     if (value !== null) {
-      this.props.navigation.navigate('HomeScreen');
+      this.props.navigation.navigate('Home');
     }
   }
+
   render() {
     return (
       <Onboarding
@@ -37,8 +39,8 @@ class IntroScreen extends Component {
             subtitle: 'POWERED BY DARKSKY',
           },
         ]}
-        onDone={() => this.props.navigation.navigate('HomeScreen')}
-        onSkip={() => this.props.navigation.navigate('HomeScreen')}
+        onDone={() => this.props.navigation.navigate('Home')}
+        onSkip={() => this.props.navigation.navigate('Home')}
       />
     );
   }
