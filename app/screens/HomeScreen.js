@@ -39,7 +39,7 @@ class HomeScreen extends Component {
         </TouchableOpacity>
         <Button
           title="START"
-          onPress={() => this.props.navigation.navigate('WeatherScreen')}
+          onPress={() => this.props.navigation.navigate('Weather')}
           style={{
             backgroundColor: 'black',
           }}
