@@ -90,6 +90,7 @@ class WeatherScreen extends Component {
     } catch (error) {
       console.log(error);
     }
+    console.log(this.state.cities);
   };
 
   addForecast = async (lat, lon) => {
