@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, View, Text, AsyncStorage } from 'react-native';
+import { StyleSheet, Dimensions, View, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import SlideGroup from '../components/SlideGroup';
@@ -11,13 +11,13 @@ import darkSkyAPI from '../config/darkSky';
 
 class WeatherScreen extends Component {
   static navigationOptions = {
-    title: 'Current weather',
     headerTintColor: 'black',
     headerStyle: {
       backgroundColor: 'gold',
       elevation: 0,
       borderBottomWidth: 0,
     },
+    headerLeft: null,
   };
 
   state = {
@@ -170,7 +170,6 @@ class WeatherScreen extends Component {
           onSnapToItem={this.onSnapToItem}
           activeSlide={this.state.activeSlide}
         />
-        <Text style={styles.iconCredits}>Icons designed by Eucalyp from Flaticon</Text>
         {this.state.cities.length < 6 ? (
           <Button
             onPress={() => this.toggleModal()}
@@ -204,9 +203,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'gold',
     height: height * 0.6,
-  },
-  iconCredits: {
-    fontSize: 8,
   },
 });
 

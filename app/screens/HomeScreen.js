@@ -9,7 +9,6 @@ import {
   Linking,
   AsyncStorage,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
 import Darksky from '../assets/images/darksky/poweredby-oneline.png';
 
@@ -31,7 +30,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.logoWrapper}>
-          <Icon name="sun-o" size={50} color="black" />
+          <Image source={require('../assets/images/logo/sun.png')} />
           <Text style={styles.welcome}>The Weather</Text>
         </View>
         <TouchableOpacity onPress={() => Linking.openURL('https://darksky.net/poweredby')}>

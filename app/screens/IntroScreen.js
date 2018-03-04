@@ -27,7 +27,7 @@ class IntroScreen extends Component {
           {
             backgroundColor: 'gold',
             image: <WeatherIcon name="cloud-download" size={80} color="black" />,
-            title: 'Then get the latest weather updates...',
+            title: 'To get the current weather...',
             subtitle: 'POWERED BY DARKSKY',
           },
         ]}
