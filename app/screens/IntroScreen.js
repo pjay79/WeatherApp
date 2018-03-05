@@ -4,7 +4,7 @@ import LocationIcon from 'react-native-vector-icons/Entypo';
 import WeatherIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Onboarding from 'react-native-onboarding-swiper';
 
-class IntroScreen extends Component {
+export default class IntroScreen extends Component {
   static navigationOptions = {
     headerStyle: {
       backgroundColor: 'gold',
@@ -43,5 +43,3 @@ IntroScreen.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
-
-export default IntroScreen;

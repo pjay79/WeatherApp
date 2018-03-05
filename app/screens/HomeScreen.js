@@ -12,7 +12,7 @@ import {
 import Button from '../components/Button';
 import Darksky from '../assets/images/darksky/poweredby-oneline.png';
 
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
   static navigationOptions = {
     headerStyle: {
       backgroundColor: 'gold',
@@ -78,5 +78,3 @@ HomeScreen.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
-
-export default HomeScreen;

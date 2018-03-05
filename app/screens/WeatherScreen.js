@@ -9,7 +9,7 @@ import Loading from '../components/Loading';
 import Search from '../components/Search';
 import darkSkyAPI from '../config/darkSky';
 
-class WeatherScreen extends Component {
+export default class WeatherScreen extends Component {
   static navigationOptions = {
     headerTintColor: 'black',
     headerStyle: {
@@ -29,7 +29,6 @@ class WeatherScreen extends Component {
   };
 
   componentDidMount() {
-    // AsyncStorage.clear();
     this.fetchData();
   }
 
@@ -206,5 +205,3 @@ const styles = StyleSheet.create({
     height: height * 0.6,
   },
 });
-
-export default WeatherScreen;

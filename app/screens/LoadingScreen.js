@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-class LoadingScreen extends Component {
+export default class LoadingScreen extends Component {
   static navigationOptions = {
     headerStyle: {
       backgroundColor: 'gold',
@@ -12,7 +12,6 @@ class LoadingScreen extends Component {
   };
 
   async componentDidMount() {
-    // AsyncStorage.clear();
     const value = await AsyncStorage.getItem('@SKIP_INTRO');
     if (value !== null || value === 'true') {
       this.props.navigation.navigate('Home');
@@ -31,5 +30,3 @@ LoadingScreen.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
-
-export default LoadingScreen;
