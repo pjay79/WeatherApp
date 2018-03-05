@@ -11,6 +11,29 @@ const SlideItem = ({ item, index, deleteCity }) => (
     <Image style={styles.icon} source={weatherIcons[item.forecast.data.daily.data[0].icon]} />
     <Text style={styles.temperature}>{item.forecast.data.currently.temperature}&deg;C</Text>
     <Text style={styles.description}>{item.forecast.data.daily.data[0].summary.toUpperCase()}</Text>
+    <View style={styles.details}>
+      <View style={styles.subDetails}>
+        <Image
+          style={styles.subDetailsIcon}
+          source={require('../../assets/images/weatherIcons/humidity.png')}
+        />
+        <Text style={styles.subDetailsText}>Humidity: {item.forecast.data.currently.humidity}</Text>
+      </View>
+      <View style={styles.subDetails}>
+        <Image
+          style={styles.subDetailsIcon}
+          source={require('../../assets/images/weatherIcons/sunblock.png')}
+        />
+        <Text style={styles.subDetailsText}>uvIndex: {item.forecast.data.currently.uvIndex}</Text>
+      </View>
+      <View style={styles.subDetails}>
+        <Image
+          style={styles.subDetailsIcon}
+          source={require('../../assets/images/weatherIcons/gust.png')}
+        />
+        <Text style={styles.subDetailsText}>Wind: {item.forecast.data.currently.windGust}km/h</Text>
+      </View>
+    </View>
     <TouchableOpacity onPress={() => deleteCity(index)} style={styles.deleteIcon}>
       <Icon name="trash-o" size={20} />
     </TouchableOpacity>

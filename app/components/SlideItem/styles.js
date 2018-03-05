@@ -5,15 +5,19 @@ const { height: viewportHeight } = Dimensions.get('window');
 const styles = StyleSheet.create({
   slide: {
     height: viewportHeight,
-    paddingBottom: 100,
+    paddingBottom: 200,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: 'gold',
   },
   title: {
     fontSize: 36,
     color: 'black',
-    marginBottom: 30,
+  },
+  icon: {
+    height: 80,
+    width: 80,
+    marginBottom: 25,
   },
   temperature: {
     fontSize: 24,
@@ -22,18 +26,27 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: 'black',
-    marginTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
     textAlign: 'center',
   },
-  icon: {
-    height: 80,
-    width: 80,
-    marginBottom: 25,
+  details: {},
+  subDetails: {
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  subDetailsIcon: {
+    height: 14,
+    width: 14,
+    marginRight: 20,
+  },
+  subDetailsText: {
+    fontSize: 14,
   },
   deleteIcon: {
-    marginTop: 10,
+    marginBottom: 20,
   },
 });
 

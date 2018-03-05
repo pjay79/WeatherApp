@@ -14,12 +14,14 @@ https://developers.google.com/places/web-service/intro
 
 ### iOS
 
-![shot1](https://user-images.githubusercontent.com/14052885/36338180-6ca5b502-13fc-11e8-9a86-638ebdc5019d.png)
-![shot2](https://user-images.githubusercontent.com/14052885/36338181-6cffe77a-13fc-11e8-8c46-8954c51a2b4d.png)
-![shot3](https://user-images.githubusercontent.com/14052885/36338182-6d3e6ca2-13fc-11e8-8072-481d8c9e53c8.png)
-![shot4](https://user-images.githubusercontent.com/14052885/36338183-6d7705d0-13fc-11e8-9b0c-98f2c91cb46b.png)
-![shot5](https://user-images.githubusercontent.com/14052885/36338184-6dc63a06-13fc-11e8-9cb9-f40b49ddeb07.png)
-![shot6](https://user-images.githubusercontent.com/14052885/36338185-6e14bbf4-13fc-11e8-9890-792526c6f6ba.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 08 15](https://user-images.githubusercontent.com/14052885/36958513-8ee86498-2090-11e8-9ae5-ff4f834fadb3.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 10 02](https://user-images.githubusercontent.com/14052885/36958515-93c82f84-2090-11e8-970a-fc80442ac8f1.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 10 13](https://user-images.githubusercontent.com/14052885/36958520-9611e320-2090-11e8-8fe5-f44ffbbe806d.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 10 16](https://user-images.githubusercontent.com/14052885/36958521-964d115c-2090-11e8-8b80-fd2a781b1389.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 06 32](https://user-images.githubusercontent.com/14052885/36958523-981aa030-2090-11e8-8478-4681973a32d3.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 07 03](https://user-images.githubusercontent.com/14052885/36958528-9c71e1ac-2090-11e8-9e16-a480624ee5aa.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 06 42](https://user-images.githubusercontent.com/14052885/36958533-a429376a-2090-11e8-93e4-fbb244ac2654.png)
+![simulator screen shot - iphone x - 2018-03-05 at 16 06 47](https://user-images.githubusercontent.com/14052885/36958535-a461ae24-2090-11e8-9450-0a670b8b2df0.png)
 
 ## Technology stack:
 
