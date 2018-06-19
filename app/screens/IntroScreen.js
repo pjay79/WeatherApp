@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LocationIcon from 'react-native-vector-icons/Entypo';
-import WeatherIcon from 'react-native-vector-icons/SimpleLineIcons';
+import React, { Component } from 'react';
+import SplashScreen from 'react-native-splash-screen';
+import Entypo from 'react-native-vector-icons/Entypo';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Onboarding from 'react-native-onboarding-swiper';
 
 export default class IntroScreen extends Component {
@@ -14,19 +15,23 @@ export default class IntroScreen extends Component {
     headerLeft: null,
   };
 
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
   render() {
     return (
       <Onboarding
         pages={[
           {
             backgroundColor: 'gold',
-            image: <LocationIcon name="location" size={80} color="black" />,
+            image: <Entypo name="location" size={80} color="black" />,
             title: 'Start by adding your cities...',
             subtitle: 'POWERED BY GOOGLE PLACES API',
           },
           {
             backgroundColor: 'gold',
-            image: <WeatherIcon name="cloud-download" size={80} color="black" />,
+            image: <SimpleLineIcons name="cloud-download" size={80} color="black" />,
             title: 'To get the current weather...',
             subtitle: 'POWERED BY DARKSKY',
           },

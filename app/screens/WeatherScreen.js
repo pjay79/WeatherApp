@@ -173,13 +173,13 @@ export default class WeatherScreen extends Component {
         {this.state.cities.length < 6 ? (
           <Button
             onPress={() => this.toggleModal()}
-            title="Add City"
+            title="ADD CITY"
             style={{ backgroundColor: 'black' }}
           />
         ) : (
           <Button
-            onPress={() => console.log('Maximum cities added')}
-            title="Maximum cities added"
+            onPress={() => console.log('LIMIT REACHED')}
+            title="LIMIT REACHED"
             style={{ backgroundColor: 'black' }}
           />
         )}

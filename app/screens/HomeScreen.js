@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,8 +9,8 @@ import {
   Linking,
   AsyncStorage,
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import Button from '../components/Button';
-import Darksky from '../assets/images/darksky/poweredby-oneline.png';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -22,8 +22,9 @@ export default class HomeScreen extends Component {
     headerLeft: null,
   };
 
-  async componentDidMount() {
-    await AsyncStorage.setItem('@SKIP_INTRO', JSON.stringify('true'));
+  componentDidMount() {
+    AsyncStorage.setItem('@SKIP_INTRO', 'true');
+    SplashScreen.hide();
   }
 
   render() {
@@ -34,15 +35,12 @@ export default class HomeScreen extends Component {
           <Text style={styles.welcome}>The Weather</Text>
         </View>
         <TouchableOpacity onPress={() => Linking.openURL('https://darksky.net/poweredby')}>
-          <Image style={styles.darkskyLogo} source={Darksky} />
+          <Image
+            style={styles.darkskyLogo}
+            source={require('../assets/images/darksky/poweredby-oneline.png')}
+          />
         </TouchableOpacity>
-        <Button
-          title="START"
-          onPress={() => this.props.navigation.navigate('Weather')}
-          style={{
-            backgroundColor: 'black',
-          }}
-        />
+        <Button title="START" onPress={() => this.props.navigation.navigate('Weather')} />
       </View>
     );
   }
@@ -51,7 +49,7 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: 'gold',
     paddingBottom: 10,

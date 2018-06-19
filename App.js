@@ -1,9 +1,13 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, { Component } from 'react';
+import SplashScreen from 'react-native-splash-screen';
+import MainNavigator from './app/routes/MainNavigator';
 
-import App from './app/index';
+export default class App extends Component {
+  componentDidMount() {
+    SplashScreen.hide();
+  }
 
-export default App;
+  render() {
+    return <MainNavigator />;
+  }
+}
