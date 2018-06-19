@@ -36,7 +36,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* WeatherAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WeatherAppTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		ACA6376720497608002800DB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACA6376620497608002800DB /* LaunchScreen.xib */; };
+		AC92CEF520D9CA450029F10A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC92CEF420D9CA450029F10A /* LaunchScreen.xib */; };
 		ACF14E112026833C003E00F0 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACF14DD12026833C003E00F0 /* Octicons.ttf */; };
 		ACF14E122026833C003E00F0 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACF14DD22026833C003E00F0 /* Feather.ttf */; };
 		ACF14E132026833C003E00F0 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACF14DD32026833C003E00F0 /* Entypo.ttf */; };
@@ -369,7 +369,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A2CE964AE7F344F7935FD3C4 /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
-		ACA6376620497608002800DB /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../../../../../Downloads/LaunchScreen.xib; sourceTree = "<group>"; };
+		AC92CEF420D9CA450029F10A /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		ACF14DD12026833C003E00F0 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		ACF14DD22026833C003E00F0 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
 		ACF14DD32026833C003E00F0 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
@@ -529,7 +529,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				ACA6376620497608002800DB /* LaunchScreen.xib */,
+				AC92CEF420D9CA450029F10A /* LaunchScreen.xib */,
 			);
 			name = WeatherApp;
 			sourceTree = "<group>";
@@ -1178,7 +1178,7 @@
 				ACF14E1A2026833C003E00F0 /* SimpleLineIcons.ttf in Resources */,
 				ACF14E112026833C003E00F0 /* Octicons.ttf in Resources */,
 				ACF14E122026833C003E00F0 /* Feather.ttf in Resources */,
-				ACA6376720497608002800DB /* LaunchScreen.xib in Resources */,
+				AC92CEF520D9CA450029F10A /* LaunchScreen.xib in Resources */,
 				ACF14E172026833C003E00F0 /* FontAwesome.ttf in Resources */,
 				ACF14E132026833C003E00F0 /* Entypo.ttf in Resources */,
 				ACF14E142026833C003E00F0 /* MaterialCommunityIcons.ttf in Resources */,
