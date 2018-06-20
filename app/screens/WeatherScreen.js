@@ -34,10 +34,10 @@ export default class WeatherScreen extends Component {
 
   onSnapToItem = index => this.setState({ activeSlide: index });
 
-  onPress = async (data, details = null) => {
+  onPress = async (data, details) => {
     try {
       const { cities } = this.state;
-      const addedCity = cities.find(city => city.city === details.name);
+      const addedCity = cities.find(item => item.city === details.name);
       if (!addedCity) {
         await this.addCity(
           details.name,
@@ -54,24 +54,22 @@ export default class WeatherScreen extends Component {
 
   fetchData = async () => {
     try {
-      this.toggleFetching();
+      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
       const result = await AsyncStorage.getItem('nextCities');
-      if (result !== null || undefined) {
-        const cities = JSON.parse(result);
-        cities.map(city => this.addCity(city.city, city.lat, city.lon));
-      } else {
-        this.toggleFetching();
-      }
+      const cities = JSON.parse(result);
+      cities.map(item => this.addCity(item.city, item.lat, item.lon));
+      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
     } catch (error) {
+      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
       console.log(error);
     }
   };
 
   addCity = async (city, lat, lon) => {
     try {
-      this.toggleSearching();
+      this.setState(prevState => ({ isSearching: !prevState.isSearching }));
       const forecast = await this.addForecast(lat, lon);
-      await this.setState(prevState => ({
+      this.setState(prevState => ({
         cities: [
           ...prevState.cities,
           {
@@ -82,14 +80,22 @@ export default class WeatherScreen extends Component {
           },
         ],
       }));
-      this.saveData();
-      this.closeModal();
-      this.toggleSearching();
-      this.toggleFetching();
+      const { cities } = this.state;
+      const nextCities = cities.map(item => ({
+        city: item.city,
+        lat: item.lat,
+        lon: item.lon,
+      }));
+      await AsyncStorage.setItem('nextCities', JSON.stringify(nextCities));
+      this.setState(prevState => ({
+        isSearching: !prevState.isSearching,
+        isFetching: !prevState.isFetching,
+        isModalVisible: false,
+      }));
     } catch (error) {
+      this.setState(prevState => ({ isSearching: !prevState.isSearching }));
       console.log(error);
     }
-    console.log(this.state.cities);
   };
 
   addForecast = async (lat, lon) => {
@@ -104,44 +110,29 @@ export default class WeatherScreen extends Component {
 
   deleteCity = async (index) => {
     try {
-      await this.setState(prevState => ({
-        cities: prevState.cities.filter((_, i) => i !== index),
-      }));
-
-      try {
-        if (this.state.activeSlide === this.state.cities.length) {
-          this.onSnapToItem(this.state.cities.length - 1);
-        } else {
-          this.onSnapToItem(index);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-
-      this.saveData();
+      this.setState(
+        prevState => ({
+          cities: prevState.cities.filter((_, i) => i !== index),
+        }),
+        () => {
+          if (this.state.activeSlide === this.state.cities.length) {
+            this.onSnapToItem(this.state.cities.length - 1);
+          }
+          const { cities } = this.state;
+          const nextCities = cities.map(each => ({
+            city: each.city,
+            lat: each.lat,
+            lon: each.lon,
+          }));
+          AsyncStorage.setItem('nextCities', JSON.stringify(nextCities));
+        },
+      );
     } catch (error) {
       console.log(error);
     }
   };
 
-  saveData = async () => {
-    try {
-      const { cities } = this.state;
-      const nextCities = cities.map(each => ({
-        city: each.city,
-        lat: each.lat,
-        lon: each.lon,
-      }));
-      await AsyncStorage.setItem('nextCities', JSON.stringify(nextCities));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  toggleFetching = () => this.setState(prevState => ({ isFetching: !prevState.isFetching }));
-  toggleSearching = () => this.setState(prevState => ({ isSearching: !prevState.isSearching }));
   toggleModal = () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible }));
-  closeModal = () => this.setState({ isModalVisible: false });
 
   renderItem = ({ item, index }) => (
     <SlideItem item={item} index={index} deleteCity={this.deleteCity} />

@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Dimensions } from 'react-native';
-import PropTypes from 'prop-types';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import styles from './styles';
 

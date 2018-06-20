@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import weatherIcons from '../../constants/weatherIcons';
