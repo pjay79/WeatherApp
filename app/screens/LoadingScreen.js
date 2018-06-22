@@ -5,11 +5,7 @@ import Loading from '../components/Loading';
 
 export default class LoadingScreen extends Component {
   static navigationOptions = {
-    headerStyle: {
-      backgroundColor: 'gold',
-      elevation: 0,
-      borderBottomWidth: 0,
-    },
+    header: null,
   };
 
   componentDidMount() {

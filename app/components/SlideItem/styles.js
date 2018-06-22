@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     height: viewportHeight,
     paddingBottom: 200,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     backgroundColor: 'gold',
   },
   title: {

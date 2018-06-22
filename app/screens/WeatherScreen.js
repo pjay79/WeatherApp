@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Dimensions, View, AsyncStorage, SafeAreaView } from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import SlideGroup from '../components/SlideGroup';
@@ -11,13 +11,7 @@ import darkSkyAPI from '../config/darkSky';
 
 export default class WeatherScreen extends Component {
   static navigationOptions = {
-    headerTintColor: 'black',
-    headerStyle: {
-      backgroundColor: 'gold',
-      elevation: 0,
-      borderBottomWidth: 0,
-    },
-    headerLeft: null,
+    header: null,
   };
 
   state = {
@@ -100,7 +94,9 @@ export default class WeatherScreen extends Component {
 
   addForecast = async (lat, lon) => {
     try {
+      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
       const result = await axios.get(`https://api.darksky.net/forecast/${darkSkyAPI}/${lat},${lon}?exclude=hourly,flags&units=ca`);
+      this.setState(prevState => ({ isFetching: !prevState.isFetching }));
       return result;
     } catch (error) {
       console.log(error);
@@ -140,41 +136,43 @@ export default class WeatherScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.state.isFetching ? <Loading /> : null}
-        <Modal isVisible={this.state.isModalVisible}>
-          <View style={styles.modalContainer}>
-            <Search onPress={this.onPress} />
-            {this.state.isSearching ? <Loading /> : null}
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'gold' }}>
+        <View style={styles.container}>
+          {this.state.isFetching ? <Loading /> : null}
+          <Modal isVisible={this.state.isModalVisible}>
+            <View style={styles.modalContainer}>
+              <Search onPress={this.onPress} />
+              {this.state.isSearching ? <Loading /> : null}
+              <Button
+                onPress={() => this.toggleModal()}
+                title="Close"
+                style={{
+                  backgroundColor: 'black',
+                }}
+              />
+            </View>
+          </Modal>
+          <SlideGroup
+            data={this.state.cities}
+            renderItem={this.renderItem}
+            onSnapToItem={this.onSnapToItem}
+            activeSlide={this.state.activeSlide}
+          />
+          {this.state.cities.length < 6 ? (
             <Button
               onPress={() => this.toggleModal()}
-              title="Close"
-              style={{
-                backgroundColor: 'black',
-              }}
+              title="ADD CITY"
+              style={{ backgroundColor: 'black' }}
             />
-          </View>
-        </Modal>
-        <SlideGroup
-          data={this.state.cities}
-          renderItem={this.renderItem}
-          onSnapToItem={this.onSnapToItem}
-          activeSlide={this.state.activeSlide}
-        />
-        {this.state.cities.length < 6 ? (
-          <Button
-            onPress={() => this.toggleModal()}
-            title="ADD CITY"
-            style={{ backgroundColor: 'black' }}
-          />
-        ) : (
-          <Button
-            onPress={() => console.log('LIMIT REACHED')}
-            title="LIMIT REACHED"
-            style={{ backgroundColor: 'black' }}
-          />
-        )}
-      </View>
+          ) : (
+            <Button
+              onPress={() => console.log('LIMIT REACHED')}
+              title="LIMIT REACHED"
+              style={{ backgroundColor: 'black' }}
+            />
+          )}
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -187,7 +185,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'gold',
-    paddingBottom: 10,
+    paddingTop: 25,
+    paddingBottom: 25,
   },
   modalContainer: {
     justifyContent: 'space-between',

@@ -14,12 +14,7 @@ import Button from '../components/Button';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
-    headerStyle: {
-      backgroundColor: 'gold',
-      elevation: 0,
-      borderBottomWidth: 0,
-    },
-    headerLeft: null,
+    header: null,
   };
 
   componentDidMount() {
@@ -52,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: 'gold',
-    paddingBottom: 10,
+    paddingVertical: 50,
   },
   logoWrapper: {
     alignItems: 'center',

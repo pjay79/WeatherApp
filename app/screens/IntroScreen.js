@@ -7,12 +7,7 @@ import Onboarding from 'react-native-onboarding-swiper';
 
 export default class IntroScreen extends Component {
   static navigationOptions = {
-    headerStyle: {
-      backgroundColor: 'gold',
-      elevation: 0,
-      borderBottomWidth: 0,
-    },
-    headerLeft: null,
+    header: null,
   };
 
   componentDidMount() {
